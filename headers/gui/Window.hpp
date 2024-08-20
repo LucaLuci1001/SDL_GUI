@@ -1,32 +1,30 @@
 // 
-// Created by LucaLuci1001 on 19.08.24.
+// Created by LucaLuci1001 on 20.08.24.
 //
 
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include <thread>
 #include <SDL2/SDL.h>
 
+#include "WindowHandler.hpp"
+
+class WindowHandler;
 
 class Window {
 private:
-	std::thread thread;
-
-	bool closeWindow = false;
-
-protected:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
+	bool closeWindow;
+
 public:
-	Window(char *title, int x, int y, int width, int height, uint32_t flags);
-	virtual ~Window();
+	const uint32_t id;
 
-	bool update();
-	void handleEvents();
-	void run();
+	Window(WindowHandler &windowHandler, const char *title);
 
+	bool tick();
+	virtual void handleEvent(SDL_Event &event);
 	virtual void render();
 	virtual void deInit();
 };

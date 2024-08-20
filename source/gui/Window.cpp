@@ -1,24 +1,40 @@
 // 
-// Created by LucaLuci1001 on 19.08.24.
+// Created by LucaLuci1001 on 20.08.24.
 //
 
-#include "../../gui/Window.hpp"
+#include "../../headers/gui/Window.hpp"
 
-Window::Window(char *title, int x, int y, int width, int height, uint32_t flags)
+#include <iostream>
+
+Window::Window(WindowHandler &windowHandler, const char *title)
+	: window(SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, SDL_WINDOW_SHOWN))
+	, renderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED))
+	, id(SDL_GetWindowID(window))
 {
-	window = SDL_CreateWindow(title, x, y, width, height, flags);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-	thread = std::thread(run);
+	windowHandler.addWindow(this);
 }
 
-Window::~Window()
-{}
-
-bool Window::update()
+void Window::handleEvent(SDL_Event &event)
 {
-	handleEvents();
+	switch (event.type)
+	{
+		case SDL_WINDOWEVENT:
+		{
+			if(event.window.event == SDL_WINDOWEVENT_CLOSE)
+			{
+				closeWindow = true;
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+}
 
+bool Window::tick()
+{
 	if(closeWindow)
 	{
 		deInit();
@@ -26,29 +42,23 @@ bool Window::update()
 	}
 
 	render();
+	SDL_RenderPresent(renderer);
 
 	return true;
 }
 
-void Window::handleEvents()
-{}
-
-void Window::run()
-{
-	while(true)
-	{
-		if(!update())
-		{
-			break;
-		}
-	}
-}
-
 void Window::render()
-{}
+{
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+	SDL_RenderClear(renderer);
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+	SDL_Rect rect{100, 100, 200, 200};
+	SDL_RenderFillRect(renderer, &rect);
+}
 
 void Window::deInit()
 {
-	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 }
