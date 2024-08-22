@@ -6,13 +6,16 @@
 
 #include <iostream>
 
-Window::Window(WindowHandler &windowHandler, const char *title)
-	: window(SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, SDL_WINDOW_SHOWN))
+Window::Window(WindowHandler &windowHandler, const char *title, int x, int y, int width, int height, uint32_t flags)
+	: window(SDL_CreateWindow(title, x, y, width, height, flags))
 	, renderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED))
 	, id(SDL_GetWindowID(window))
 {
 	windowHandler.addWindow(this);
 }
+
+Window::~Window()
+{}
 
 void Window::handleEvent(SDL_Event &event)
 {
@@ -31,7 +34,12 @@ void Window::handleEvent(SDL_Event &event)
 			break;
 		}
 	}
+
+	handleEventCustom(event);
 }
+
+void Window::handleEventCustom(SDL_Event &event)
+{}
 
 bool Window::tick()
 {
@@ -48,14 +56,7 @@ bool Window::tick()
 }
 
 void Window::render()
-{
-	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-	SDL_RenderClear(renderer);
-
-	SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-	SDL_Rect rect{100, 100, 200, 200};
-	SDL_RenderFillRect(renderer, &rect);
-}
+{}
 
 void Window::deInit()
 {

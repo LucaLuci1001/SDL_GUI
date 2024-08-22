@@ -16,15 +16,17 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	bool closeWindow;
+	bool closeWindow = false;
 
 public:
 	const uint32_t id;
 
-	Window(WindowHandler &windowHandler, const char *title);
+	Window(WindowHandler &windowHandler, const char *title, int x, int y, int width, int height, uint32_t flags);
+	~Window();
 
 	bool tick();
-	virtual void handleEvent(SDL_Event &event);
+	void handleEvent(SDL_Event &event);
+	virtual void handleEventCustom(SDL_Event &event);
 	virtual void render();
 	virtual void deInit();
 };
