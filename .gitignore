@@ -6,3 +6,8 @@
 !source/**
 !headers
 !headers/**
+!ressources
+!ressources/**
+
+/ressources/Open_Sans/static/**
+!ressources/Open_Sans/static/OpenSans-Regular.ttf

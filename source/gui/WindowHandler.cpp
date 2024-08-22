@@ -26,6 +26,8 @@ bool WindowHandler::tick()
 		return !pair.second->tick();
 	});
 
+	fontManager.tick();
+
 	return !windows.empty();
 }
 

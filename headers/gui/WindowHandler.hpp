@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "Window.hpp"
+#include "utils/FontManager.hpp"
 
 class Window;
 
@@ -20,6 +21,8 @@ private:
 public:
 	WindowHandler();
 	~WindowHandler();
+
+	FontManager fontManager;
 
 	bool tick();
 	void handleEvents();

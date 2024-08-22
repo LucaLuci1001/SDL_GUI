@@ -30,3 +30,5 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_mixer SDL2_ttf)
+
+file(COPY ${CMAKE_SOURCE_DIR}/ressources/ DESTINATION ${CMAKE_BINARY_DIR}/ressources/)
