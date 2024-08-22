@@ -14,11 +14,15 @@ class WindowHandler;
 class Window
 {
 private:
+	bool closeWindow = false;
+	bool keepRunningInBG;
+
+protected:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	bool closeWindow = false;
-	bool keepRunningInBG;
+	int32_t mouseX;
+	int32_t mouseY;
 
 public:
 	const uint32_t id;
@@ -31,7 +35,7 @@ public:
 	void handleEvent(SDL_Event &event);
 	virtual void handleEventCustom(SDL_Event &event);
 	virtual void handleLogic();
-	virtual void render();
+	virtual void render(int32_t mouseX, int32_t mouseY);
 	virtual void deInit();
 };
 

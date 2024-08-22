@@ -31,6 +31,11 @@ void Window::handleEvent(SDL_Event &event)
 			}
 			break;
 		}
+		case SDL_MOUSEMOTION:
+		{
+			mouseX = event.motion.x;
+			mouseY = event.motion.y;
+		}
 		default:
 		{
 			break;
@@ -57,7 +62,7 @@ bool Window::tick()
 	if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN)
 	{
 		handleLogic();
-		render();
+		render(mouseX, mouseY);
 		SDL_RenderPresent(renderer);
 	} else if (keepRunningInBG)
 	{
@@ -67,7 +72,7 @@ bool Window::tick()
 	return true;
 }
 
-void Window::render()
+void Window::render(int32_t mouseX, int32_t mouseY)
 {}
 
 void Window::deInit()
