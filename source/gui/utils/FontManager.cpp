@@ -9,14 +9,14 @@
 FontManager::FontManager()
 {}
 
-Font *FontManager::loadFont(std::string path, int size)
+Font &FontManager::loadFont(std::string path, int size)
 {
 	for (const auto font : fonts)
 	{
 		if(font->path == path && font->size == size)
 		{
 			font->refCount++;
-			return font;
+			return *font;
 		}
 	}
 
@@ -25,7 +25,7 @@ Font *FontManager::loadFont(std::string path, int size)
 	newFont->refCount++;
 	fonts.insert(newFont);
 
-	return newFont;
+	return *newFont;
 }
 
 void FontManager::tick()

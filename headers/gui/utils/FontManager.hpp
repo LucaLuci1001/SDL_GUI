@@ -17,7 +17,7 @@ private:
 public:
 	FontManager();
 
-	Font *loadFont(std::string path, int size);
+	Font &loadFont(std::string path, int size);
 
 	void tick();
 };

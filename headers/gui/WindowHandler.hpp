@@ -15,6 +15,7 @@ class WindowHandler
 {
 private:
 	std::unordered_map<uint32_t, Window *> windows;
+	FontManager fontManager;
 
 	void addWindow(Window *window);
 
@@ -22,10 +23,10 @@ public:
 	WindowHandler();
 	~WindowHandler();
 
-	FontManager fontManager;
-
 	bool tick();
 	void handleEvents();
+
+	FontManager &getFontmanager();
 
 	friend class Window;
 };

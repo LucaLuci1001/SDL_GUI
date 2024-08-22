@@ -43,3 +43,8 @@ void WindowHandler::handleEvents()
 		}
 	}
 }
+
+FontManager &WindowHandler::getFontmanager()
+{
+	return fontManager;
+}
