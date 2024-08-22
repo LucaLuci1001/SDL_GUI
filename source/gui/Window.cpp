@@ -23,7 +23,7 @@ void Window::handleEvent(SDL_Event &event)
 	{
 		case SDL_WINDOWEVENT:
 		{
-			if(event.window.event == SDL_WINDOWEVENT_CLOSE)
+			if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 			{
 				closeWindow = true;
 			}
@@ -43,14 +43,17 @@ void Window::handleEventCustom(SDL_Event &event)
 
 bool Window::tick()
 {
-	if(closeWindow)
+	if (closeWindow)
 	{
 		deInit();
 		return false;
 	}
 
-	render();
-	SDL_RenderPresent(renderer);
+	if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN)
+	{
+		render();
+		SDL_RenderPresent(renderer);
+	}
 
 	return true;
 }
