@@ -14,6 +14,9 @@ void WindowHandler::addWindow(Window *window)
 WindowHandler::WindowHandler()
 {}
 
+WindowHandler::~WindowHandler()
+{}
+
 bool WindowHandler::tick()
 {
 	handleEvents();

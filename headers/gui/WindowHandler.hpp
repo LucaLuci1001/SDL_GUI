@@ -19,6 +19,7 @@ private:
 
 public:
 	WindowHandler();
+	~WindowHandler();
 
 	bool tick();
 	void handleEvents();
