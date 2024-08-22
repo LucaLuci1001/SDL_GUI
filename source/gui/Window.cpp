@@ -10,6 +10,7 @@ Window::Window(WindowHandler &windowHandler, bool keepRunningInBG, const char *t
                , int height, uint32_t flags)
 	: window(SDL_CreateWindow(title, x, y, width, height, flags))
 	, renderer(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED))
+	, windowHandler(&windowHandler)
 	, keepRunningInBG(keepRunningInBG)
 	, id(SDL_GetWindowID(window))
 {
@@ -43,6 +44,11 @@ void Window::handleEvent(SDL_Event &event)
 	}
 
 	handleEventCustom(event);
+
+	for (auto element: elements)
+	{
+		element->handleEvent(event);
+	}
 }
 
 void Window::handleEventCustom(SDL_Event &event)
@@ -79,4 +85,9 @@ void Window::deInit()
 {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+}
+
+SDL_Renderer *Window::getRenderer()
+{
+	return renderer;
 }
