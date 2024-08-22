@@ -21,8 +21,8 @@ protected:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 
-	int32_t mouseX;
-	int32_t mouseY;
+	int32_t mouseX = 0;
+	int32_t mouseY = 0;
 
 public:
 	const uint32_t id;
