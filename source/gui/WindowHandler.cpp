@@ -37,6 +37,17 @@ void WindowHandler::handleEvents()
 
 	while (SDL_PollEvent(&event))
 	{
+		if(event.type == SDL_QUIT)
+		{
+			SDL_Event quitEvent;
+			quitEvent.type = SDL_WINDOWEVENT;
+			quitEvent.window.event = SDL_WINDOWEVENT_CLOSE;
+			for (const auto &window : windows)
+			{
+				window.second->handleEvent(quitEvent);
+			}
+			break;
+		}
 		if(windows.contains(event.window.windowID))
 		{
 			windows.at(event.window.windowID)->handleEvent(event);
