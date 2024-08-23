@@ -4,9 +4,10 @@
 
 #ifndef ELEMENT_HPP
 #define ELEMENT_HPP
-#include "../Window.hpp"
+#include <cstdint>
+#include <SDL_events.h>
 
-
+class Window;
 
 class Element {
 private:
