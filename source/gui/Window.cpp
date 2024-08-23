@@ -6,6 +6,11 @@
 
 #include <iostream>
 
+void Window::addElement(Element *element)
+{
+	elements.push_back(element);
+}
+
 Window::Window(WindowHandler &windowHandler, bool keepRunningInBG, const char *title, int x, int y, int width
                , int height, uint32_t flags)
 	: window(SDL_CreateWindow(title, x, y, width, height, flags))

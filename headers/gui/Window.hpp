@@ -12,6 +12,7 @@
 #include "elements/Element.hpp"
 
 class WindowHandler;
+class Element;
 
 class Window
 {
@@ -21,7 +22,7 @@ private:
 
 	std::vector<Element *> elements;
 
-	virtual void addElement(Element *element);
+	void addElement(Element *element);
 
 protected:
 	SDL_Window *window;
